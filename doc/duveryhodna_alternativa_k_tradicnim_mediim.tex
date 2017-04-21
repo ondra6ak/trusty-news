@@ -1,103 +1,55 @@
-\documentclass[12pt,a4paper]{report}
+\documentclass[a4papper]{article}
 
 \usepackage[czech]{babel}
 \usepackage{hyperref}
-
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{-}
 \usepackage{fontspec}
-\setmainfont{Liberation Serif}
+\setmainfont[ItalicFont={Roboto Italic}]{Roboto Slab}
 \usepackage[backend=biber,style=iso-authoryear,autolang=other,sortlocale=cs_CZ,natbib=true]{biblatex}
 \bibliography{duveryhodna_alternativa_k_tradicnim_mediim.bib}
 \usepackage{tikz}
-\usepackage[xindy,toc]{glossaries}
-
-\usepackage[left=3.5cm,top=2.5cm,right=1.5cm,bottom=2.5cm]{geometry}
-\setlength{\parindent}{0em}
-\setlength{\parskip}{0.1in}
-\usepackage{titlesec}
-\titleformat{\chapter}[block]{\normalfont\fontsize{18pt}{1em}\selectfont\bfseries\scshape}{\thechapter}{1em}{\fontsize{18pt}{1em}\selectfont}\titlespacing*{\chapter}{0pt}{0pt}{0.5em}
-\titleformat{\section}[block]{\normalfont\fontsize{16pt}{1em}\selectfont\bfseries}{\thesection}{1em}{\fontsize{16pt}{1em}\selectfont}\titlespacing*{\section}{0pt}{0.5em}{0.5em}
-\setcounter{page}{3}
+\usepackage{mathtools}
 
 % \usepackage{draftwatermark}
 % \SetWatermarkText{DRAFT}
 
-\newglossaryentry{peer-to-peer}{
-	name = peer-to-peer,
-	description = {Decentralizovaná síť, kde jsou jednotlivé uzly propojeny přímo mezi sebou}
-}
-
-\newglossaryentry{p2p}{
-	name = p2p,
-	description = {Viz. peer-to-peer}
-}
-
-\newglossaryentry{elektronicky-podpis}{
-	name = elektronický podpis,
-	description = {Mechanismus, pomocí kterého můžeme ověřit, že zpráva opravdu pochází od uživatele, který ji podepsal \citep[str. 22]{handbook96}}
-}
-
-\newglossaryentry{asymetricka-kryptografie}{
-	name = asymetrická kryptografie,
-	description = {Šifrování pomocí veřejných a soukromých klíčů, nevyžaduje sdílené tajemství (např. heslo) \citep[str. 25]{handbook96}}
-}
-
-\newglossaryentry{soukromy-klic}{
-	name = soukromý klíč,
-	description = {Klíč pomocí kterého odesílatel zašifruje zprávu, musí být známý jenom odesílateli \citep[str. 29]{handbook96} (v této práci)}
-}
-
-\newglossaryentry{verejny-klic}{
-	name = veřejný klíč,
-	description = {Klíč odesílatele pomocí kterého příjemce dešifruje zprávu, ověří její původ od odesílatele \citep[str. 29]{handbook96} (v této práci)}
-}
-
-\newglossaryentry{pgp}{
-	name = PGP,
-	description = {\textit{Pretty Good Privacy}, oblíbený systém pro šifrované přenášení zpráv pomocí asymetrické kryptografie, viz. \cite{rfc4880,intro99}}
-}
-
-\newglossaryentry{tradicni-media}{
-	name = tradiční média,
-	description = {Zde myšlen tisk, televize a rozhlas.}
-}
-
-\makeglossaries
-
 \begin{document}
+\addfontfeature{LetterSpace=2}
 \title{Důvěryhodná alternativa k tradičním mediím}
 \author{Ondřej Šesták}
-%\maketitle
+\maketitle
 
 \tableofcontents
 
-\chapter{Úvod}
+\section{Úvod}
 \label{ch:uvod}
 
-Právě sledujeme trend klesání důvěry v \gls{tradicni-media}.
+Právě sledujeme trend klesání důvěry v tradiční média.
 
 Díky rozšíření Internetu si poprvé v historii mohou lidé po celém světě vyměňovat informace přímo mezi sebou, bez nutnosti centrální instituce. Vzniká tak prostor pro pluralitu názorů, kdy můžeme vidět několik různých (často protichůdných) výkladů též situace, ze kterých lidé vybírají na základě sentimentu, ne objektivního posouzení informace.
 
 Další aktuální trend je pokrok v možnostech úpravy audiovizuálního záznamu a klesající cena potřebných technologií, díky tomu je snazší věrohodně falšovat důkazy o událostech a předpokládám, že v budoucnu pouhý audiovizuální záznam neobstojí jako věrohodný zdroj informací.
 
-Protože kvalitní informovanost je předpoklad k funkční demokratické společnosti, předkládám zde návrh sociální sítě, která vyvíjí tlak na ověřování informací a u každé zprávy zobrazuje její důvěryhodnost pro konkrétního uživatele. Pomocí technologií jako jsou \gls{asymetricka-kryptografie}, \gls{peer-to-peer} sítě, \gls{elektronicky-podpis} a síť důvěry se snažím přenést vztahy fungující v malých lidských skupinách na co největší počet lidí.
+Protože kvalitní informovanost je předpoklad k funkční demokratické společnosti, předkládám zde návrh sociální sítě, která vyvíjí tlak na ověřování informací a u každé zprávy zobrazuje její důvěryhodnost pro konkrétního uživatele. Pomocí technologií jako jsou asymetrická kryptografie, peer-to-peer sítě, elektronický podpis a síť důvěry se snažím přenést vztahy fungující v malých lidských skupinách na co největší počet lidí.
 
-\chapter{Problém}
+\section{Problém}
 \label{ch:problem}
 
-V demokratické společnosti hrají sdělovací prostředky (média) zásadní roli, podle \citeauthor{netanel01}a mají tři funkce: 1. kontrolovat, 2. usnadnit veřejnou diskuzi, 3. poskytovat důvěryhodné informace \citep{netanel01}. Protože je demokracie ze své podstaty založena na rozhodování občanů, je třetí bod velmi důležitý pro celou společnost. \Gls{tradicni-media} tento úkol plnily po staletí, ale nyní důvěra v ně postupně klesá.
+V demokratické společnosti hrají sdělovací prostředky (média) zásadní roli, podle \citeauthor{netanel01}a mají tři funkce: 1. kontrolovat, 2. usnadnit veřejnou diskuzi, 3. poskytovat důvěryhodné informace \citep{netanel01}. Protože je demokracie ze své podstaty založena na rozhodování občanů, je třetí bod velmi důležitý pro celou společnost. Tradiční média tento úkol plnila po staletí, ale nyní důvěra v ně postupně klesá.
 
-Mohlo by se zdát, že televize je nejdůvěryhodnější zdroj informací - dokáže přenést obraz i zvuk a divák pozná, jestli záznam mluvícího člověka na obrazovce je věrohodný nebo ne. Ale s pokrokem v možnostech úpravy audiovizuálního záznamu a s klesáním ceny k tomu potřebných technologií (podle Moorova zákona se výkon polovodičových součástek zdvojnásobí přibližně každé dva roky při zachování ceny \citep{moore04}\footnote{Původně každý rok \citep{moore65}, ale v roce 1975 upraveno a tak je zákon platný dodnes.}) toto platit přestává. Příklady jsou následující: Společnost \textit{Adobe} představila nástroj na úpravu hlasového záznamu, kterému stačí vzorek něčího hlasu a posléze je schopný syntetizovat jakékoliv vyjádření \citep{anthony16}. Ve filmu \textit{Rogue One} ze série \textit{Star Wars} vystupovaly postavy, jejichž herci byly v době natáčení po smrti, nebo výrazně viditelně starší \citep{cooper17}. \citeauthor{thies16} navrhli program, který v reálném času umožňuje velmi věrohodně zaměnit výraz člověka ve videu podle výrazu herce snímaného kamerou \citep{thies16}.
+Mohlo by se zdát, že televize je nejdůvěryhodnější zdroj informací - dokáže přenést obraz i zvuk a divák pozná, jestli záznam mluvícího člověka na obrazovce je věrohodný nebo ne. Ale s pokrokem v možnostech úpravy audiovizuálního záznamu a s klesáním ceny k tomu potřebných technologií (podle Moorova zákona se výkon polovodičových součástek zdvojnásobí přibližně každé dva roky při zachování ceny \citep{moore04}\footnote{Původně každý rok \citep{moore65}, ale v roce 1975 upraveno a tak je zákon platný dodnes.}) toto platit přestává. Příklady jsou následující: Společnost \textit{Adobe} představila nástroj na úpravu hlasového záznamu, kterému stačí vzorek něčího hlasu a posléze je schopný syntetizovat jakékoliv vyjádření \citep{anthony16}. Ve filmu \textit{Rogue One} ze série \textit{Star Wars} vystupovaly postavy, jejichž herci byly v době natáčení po smrti, nebo výrazně viditelně starší \citep{cooper17}. \citeauthor{thies16} navrhli program, který v reálném čase umožňuje velmi věrohodně zaměnit výraz člověka ve videu podle výrazu herce snímaného kamerou \citep{thies16}.
 
 Další z problémů s tradičními médii je tzv. \textit{gatekeeping} - média jsou zpravidla centrálně řízené organizace s hierarchickou strukturou, informace postupně prochází přes několik instancí v této struktuře a při každém kroku jsou posuzovány a upravovány \citep{dragoni13}. Tímto proces je zajištěna důvěryhodnost a kvalita informací, ale to znamená, že pro jednotlivce je příliš snadné informaci poškodit (ať už úmyslné, či omylem).
 
-\begin{figure}
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}
-	\node[rectangle,draw] (r1) at (0,3) {Reportér1};
-	\node[rectangle,draw] (r2) at (0,0) {Reportér2};
+	\node[circle,draw] (r1) at (0,4) {Reportér1};
+	\node[circle,draw] (r2) at (0,0) {Reportér2};
 	\node[rectangle,draw] (i) at (2, 2) {Instituce};
-	\node[rectangle,draw] (k1) at (3, 3) {Konzument1};
-	\node[rectangle,draw] (k2) at (3, 0) {Konzument2};
+	\node[circle,draw] (k1) at (4, 4) {Konzument1};
+	\node[circle,draw] (k2) at (4, 0) {Konzument2};
 	\draw[->] (r1) -- (i);
 	\draw[->] (r2) -- (i);
 	\draw[->] (i) -- (k1);
@@ -108,39 +60,39 @@ Další z problémů s tradičními médii je tzv. \textit{gatekeeping} - média
 
 Podle \citeauthor{dragoni13} je tento tok informací jednosměrný a koncový konzument nemá možnost jak v reálném čase podat zpětnou vazbu, proto vzniká problém zvaný \textit{agenda-setting}, kdy téma veřejné debaty určují média \citep{dragoni13}. Koncový konzument ale může začít konzumovat jiné médium a tak jej může ovlivnit prostřednictví volného trhu.
 
-Klesání důvěry v \gls{tradicni-media} potvrzují např. \citeauthor{janda16b}, když říkají, že 25.5\% Čechů věří alternativním médiím\footnote{Například Parlamentní listy, AC24.cz, PrvníZprávy.cz} a 24.5\% Čechů jim věří více než tradičním médiím\footnote{Například Česká televize, Český rozhlas či deníky Právo nebo Hospodářské noviny} \citep{janda16b}. Tyto média přitom šíří úplně nebo částečně nepravdivé informace, které často zpochybňují demokratické instituce a pozitivně se vyjadřují k režimům s vetší, či menší mírou nesvobody \citep{janda16a}. Navíc se jim tento styl uvažování daří šířit společností \citep{janda16b}.
+Klesání důvěry v tradiční média potvrzují např. \citeauthor{janda16b}, když říkají, že 25.5\% Čechů věří alternativním médiím\footnote{Například Parlamentní listy, AC24.cz, PrvníZprávy.cz} a 24.5\% Čechů jim věří více než tradičním médiím\footnote{Například Česká televize, Český rozhlas či deníky Právo nebo Hospodářské noviny} \citep{janda16b}. Tyto média přitom šíří úplně nebo částečně nepravdivé informace, které často zpochybňují demokratické instituce a pozitivně se vyjadřují k režimům s vetší, či menší mírou nesvobody \citep{janda16a}. Navíc se jim tento styl uvažování daří šířit společností \citep{janda16b}.
 
 Problém popsaný v této kapitole vede k paradoxnímu vztahu, kdy s technickým pokrokem stoupá hodnota očitého svědectví.
 
-\chapter{Řešení}
+\section{Řešení}
 \label{ch:reseni}
 
 Protože není v silách jednotlivce byt očitým svědkem všech událostí ovlivňujících jeho rozhodování, potřebujeme nový systém distribuce a sběru zpráv, které nebude trpět neduhy popsanými v kapitole \ref{ch:problem}.
 
-Často zaklínaným řešením je prostá \gls{peer-to-peer} síť (Twitter, Facebook, ...), kde si každý může publikovat cokoliv, tyto sítě ale trpí nedostatkem sebekontroly a stávají se prostorem pro šíření různých falešných zpráv \citep{netanel01}. Proto například \citeauthor{giasemidis16} navrhují systém, který určí důvěryhodnost těchto informací \citep{giasemidis16}, nebo \citeauthor{mishra13} kteří popisují různé metody detekce manipulovaní s obrazem \citep{mishra13}. Zde navržený systém je podobný \citeauthor{dragoni13}, ale přidávám osobní reputaci uživatele, kterou se zaručuje za každý svůj krok a tato reputace zároveň ovlivňuje váhu každého kroku, tímto je vyvíjen tlak na to, aby se uživatel choval zodpovědně.
+Často zaklínaným řešením je prostá peer-to-peer síť (Twitter, Facebook, ...), kde si každý může publikovat cokoliv, tyto sítě ale trpí nedostatkem sebekontroly a stávají se prostorem pro šíření různých falešných zpráv \citep{netanel01}. Proto například \citeauthor{giasemidis16} navrhují systém, který určí důvěryhodnost těchto informací \citep{giasemidis16}, nebo \citeauthor{mishra13} kteří popisují různé metody detekce manipulování s obrazem \citep{mishra13}. Zde navržený systém je podobný \citeauthor{dragoni13}, ale přidávám osobní reputaci uživatele, kterou se zaručuje za každý svůj krok a tato reputace zároveň ovlivňuje váhu každého kroku, tímto je vyvíjen tlak na to, aby se uživatel choval zodpovědně.
 
-\section{Zpráva}
+\subsection{Zpráva}
 \label{sec:zprava}
 
 Zprávou se myslí informace o nějaké události, které byl uživatel zprávu publikující očitým svědkem - může se osobně zaručit za její pravdivost.
 
 Zpráva obsahuje místo, kterého se týká (přesnost tohoto určení je ponechána na uživateli), samotný text zprávy a případnou obrazovou či zvukovou dokumentaci.
 
-Každá zpráva je podepsána uživatelem, který ji publikoval (použije svůj \gls{soukromy-klic}) a ten se tím osobně zaručuje za její pravost. Zprávu poté dále podepisují uživatelé, kteří se také mohou osobně zaručit za její pravost, zároveň se mohou zaručit za její nepravost. Pokud je počet uživatelů, kteří se zaručili za pravost zprávy (podepsali ji) menší, než počet uživatelů, kteří se zaručili za její nepravost, je zpráva označena jako nepravdivá, uživateli, který ji publikoval (původní uživatel) a všem kteří ji garantovali jako pravou (sekundární uživatelé) je snížena reputace (dost výrazně na to, aby si nedovolili toto opakovat). Pokud se zpráva ukáže jako pravá (počet uživatelů, kteří ji potvrdili bude větší, než počet uživatelů, kteří ji zamítli) reputace původního a sekundárních uživatelů se zvýší.
+Každá zpráva je podepsána uživatelem, který ji publikoval a ten se tím osobně zaručuje za její pravost. Zprávu poté dále podepisují uživatelé, kteří se také mohou osobně zaručit za její pravost, zároveň se mohou zaručit za její nepravost. Pokud je počet uživatelů, kteří se zaručili za pravost zprávy (podepsali ji) menší, než počet uživatelů, kteří se zaručili za její nepravost, je zpráva označena jako nepravdivá, uživateli, který ji publikoval (původní uživatel) a všem kteří ji garantovali jako pravou (sekundární uživatelé) je snížena reputace (dost výrazně na to, aby si nedovolili toto opakovat). Pokud se zpráva ukáže jako pravá (počet uživatelů, kteří ji potvrdili bude větší, než počet uživatelů, kteří ji zamítli) reputace původního a sekundárních uživatelů se zvýší.
 
 \section{Decentralizace}
 \label{sec:decentralizace}
-Odstraněním centrální instituce sice zmizí problémy popisované v kapitole \ref{ch:problem}, ale zároveň se garance kvality informace přesune z instituce dávající všanc svojí reputaci na jednotlivce, který si kdykoliv může založit jiný účet pod jinou identitou. Navíc bychom sami museli prohlédnout všechny informace a rozhodnout zda jsou pro nás relevantní, což také není v silách jednotlivce. \citep{netanel01}
+Odstraněním centrální instituce sice zmizí problémy popisované v kapitole \ref{ch:problem}, ale zároveň se garance kvality informace přesouvá z instituce dávající všanc svojí reputaci na jednotlivce, který si kdykoliv může založit jiný účet pod jinou identitou. Navíc bychom sami museli prohlédnout všechny informace a rozhodnout zda jsou pro nás relevantní, což také není v silách jednotlivce. \citep{netanel01}
 
 Zbavit se centrální instituce je žádoucí, ale potřebujeme jiný mechanismus jak zaručit původ a důvěryhodnost zprávy a mechanismus, který bude zprávy filtrovat.
 
-\begin{figure}
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}
-	\node[rectangle,draw] (u1) at (0,3) {Uživatel1};
-	\node[rectangle,draw] (u2) at (0,0) {Uživatel2};
-	\node[rectangle,draw] (u3) at (3, 3) {Uživatel3};
-	\node[rectangle,draw] (u4) at (3, 0) {Uživatel4};
+	\node[circle,draw] (u1) at (0,3) {Uživatel1};
+	\node[circle,draw] (u2) at (0,0) {Uživatel2};
+	\node[circle,draw] (u3) at (3, 3) {Uživatel3};
+	\node[circle,draw] (u4) at (3, 0) {Uživatel4};
 	\draw[<->] (u1) -- (u2);
 	\draw[<->] (u1) -- (u3);
 	\draw[<->] (u1) -- (u4);
@@ -148,57 +100,93 @@ Zbavit se centrální instituce je žádoucí, ale potřebujeme jiný mechanismu
 	\draw[<->] (u2) -- (u4);
 	\draw[<->] (u3) -- (u4);
 \end{tikzpicture}
-\caption{Decentralizované médium, obyčejná \gls{peer-to-peer} síť}
+\caption{Decentralizované médium, obyčejná peer-to-peer síť}
 \end{figure}
 
-\section{Uživatel}
+\subsection{Uživatel}
 \label{sec:uzivatel}
 V decentralizovaném systému je uživatel základní jednotkou, má čtyři role: 1. publikovat zprávy, 2. přijímat zprávy, 3. validovat zprávy a za 4. validovat uživatele. Jeho hlavními atributy jsou certifikát a reputace.
 
-Certifikát uživatele se obsahuje identitu uživatele, (jméno, e-mailová adresa, číslo občanského průkazu, adresa bydliště, ...) podle které je jednoznačně možné ho identifikovat, \gls{verejny-klic}, podpisy ostatních uživatelů a jeho reputaci jakožto validátora uživatelů (rozdílná od reputace jakožto vydavatele zpráv).
+Certifikát uživatele obsahuje identitu uživatele, (jméno, e-mailová adresa, číslo občanského průkazu, adresa bydliště, ...) podle které je jednoznačně možné ho identifikovat, veřejný klíč a podpisy ostatních uživatelů.
 
-\section{Síť důvěry}
+\subsection{Síť důvěry}
 \label{sec:sit_duvery}
 
-Protože je potřeba zajistit pravost identity uživatele, ostatní uživatelé se mohou osobně zaručit za jeho pravost svojí reputací podepsáním jeho certifikátu (validací), můžeme si to představit jako potvrzení přátelství na sociální síti Facebook \citep{intro99}.
+Protože je potřeba zajistit pravost identity uživatele, ostatní uživatelé se mohou osobně zaručit za jeho pravost svojí reputací - podepsáním jeho certifikátu (validací), můžeme si to představit jako potvrzení přátelství na sociální síti Facebook \citep{intro99}. Zároveň uživatelé takto vyjadřují důvěru v druhé uživatele jakožto zdroje zpráv. Vztah  mezi validujícím a validovaným uživatelem je z hlediska důvěry považován za obousměrný.
 
-Tímto se buduje síť důvěry a díky tomu je možné zjistit vzdálenost uživatelů, tedy kolik uživatelů je potřeba propojit, aby se spojili dva uživatelé, toto číslo je průměrně šest \citep{intro99}.
+\begin{figure}
+\centering
+\begin{tikzpicture}
+	\node[circle,draw] (u1) at (0, 4) {Uživatel1};
+	\node[circle,draw] (u2) at (3, 4) {Uživatel2};
+	\node[circle,draw] (u3) at (6, 4) {Uživatel3};
+	\node[circle,draw] (u4) at (0, 0) {Uživatel4};
+	\node[circle,draw] (u5) at (3, 0) {Uživatel5};
+	\node[circle,draw] (u6) at (6, 0) {Uživatel6};
+	\draw[->] (u1) -- (u2);
+	\draw[->] (u3) -- (u2);
+	\draw[->] (u4) -- (u2);
+	\draw[->] (u5) -- (u2);
+	\draw[->] (u1) -- (u4);
+	\draw[->] (u5) -- (u1);
+	\draw[->] (u6) -- (u1);
+\end{tikzpicture}
+\caption{Síť důvěry}
+\end{figure}
 
-Z pohledu uživatele (Alice) závisí důvěryhodnost jiného uživatele (Boba) na bobově reputaci, vzdálenosti Alice od Boba, kolik uživatelů podepsalo bobův certifikát a důvěryhodnosti těchto uživatelů vzhledem k Alici.
+Tímto se buduje síť důvěry a díky tomu je možné zjistit vzdálenost uživatelů, tedy kolik uživatelů je potřeba propojit, aby se spojili dva uživatelé. Toto číslo bylo průměrně šest \citep{intro99,travers69}. Podle \citeauthor{edunov16} je mezi uživateli sociální sítě Facebook vzdálenost dvou náhodných lidí ještě nižší a sice 3.57 \citep{edunov16}.
 
-Uživatele je potřeba motivovat k pečlivému ověření identity před validací uživatele, aby nedocházelo ke vzniku falešných uživatelů, ve skutečnosti neexistujících. To zajišťuje mechanismus, který v případě, že se uživatel ukáže jako falešný sníží důvěryhodnost všem uživatelů, kteří podepsali jeho certifikát a tím pádem se sníží důvěryhodnost všech uživatelů, kterým tito uživatelé podepsaly certifikát.
+\begin{figure}
+\centering
+\begin{tikzpicture}
+	\node[circle,draw] (u1) at (0,0) {Uživatel1};
+	\node[circle,draw] (u2) at (3,0) {Uživatel2};
+	\node[circle,draw] (u3) at (6, 0) {Uživatel3};
+	\node[circle,draw] (u4) at (9, 0) {Uživatel4};
+	\draw[->] (u1) -- (u2);
+	\draw[->] (u2) -- (u3);
+	\draw[->] (u3) -- (u4);
+\end{tikzpicture}
+\caption{Vzdálenost uživatelů, vzdálenost Uživatele1 od Uživatele4 je 2}
+\end{figure}
 
-Tato síť by měla být nezávislá na systému distribuce zpráv a měla by být kompatibilní se systémem \gls{pgp}.
+Z pohledu uživatele (Alice) závisí důvěryhodnost jiného uživatele (Boba) na Bobově reputaci, vzdálenosti Alice od Boba, kolik nezávislých (tj. uživatelů, kteří nejsou přímo navzájem propojeni) uživatelů podepsalo Bobův certifikát a důvěryhodnosti těchto uživatelů vzhledem k Alici.
 
-Detailní návrh sítě důvěry by vydal na celou další práci a hodlám se jím zabývat při implementaci celého systému.
+Zároveň se sítí důvěry předejde vzniku skupin uživatelů, snažících se o zneužití sítě ve svůj prospěch. Pokud by došlo ke koncentraci uživatelů, kteří by se navzájem potvrdili, jejich důvěryhodnost pro uživatele mimo tuto skupinu by byla malá.
 
-\section{Příjem zprávy}
+Tato síť by měla být nezávislá na systému distribuce zpráv a měla by být kompatibilní se systémem PGP. Detailní návrh sítě důvěry by vydal na celou další práci a hodlám se jím zabývat při implementaci celého systému.
+
+\subsection{Příjem zprávy}
 \label{sec:prijem_zpravy}
 
-Při příjmu (zobrazení) zprávy se uživateli (Alici) zobrazí obsah zprávy a důvěryhodnost konkrétní zprávy pro konkrétního uživatele. Alice má možnost zprávu potvrdit nebo zamítnout.
+Při příjmu zprávy se konzumentovi zobrazí nejen obsah zprávy, ale i to jak je přímo pro ně zpráva důvěryhodná. Konzument má možnost zprávu potvrdit nebo zamítnout a tím dále ovlivnit její důvěryhodnost.
 
-Důvěryhodnost zprávy závisí na vzdálenosti původního uživatele od Alice, reputaci původního uživatele, počtu a vzdálenosti sekundárních uživatelů od Alice a jejich reputaci. Samotné rozhodnutí, zda je zpráva pravdivá nebo ne je ponecháno na Alici, i když existují pokusy o automatizaci tohoto rozhodnutí (např. \cite{giasemidis16}), kategoricky jsem se rozhodl nechat toto rozhodnutí na uživateli.
+Důvěryhodnost zprávy $C$ závisí na důvěryhodnosti uživatele, který ji publikoval vzhledem ke konzumentovi zprávy (viz. \ref{sec:sit_duvery}) $T_p$, reputaci tohoto uživatele $R_p$ a rozdílu důvěryhodnosti $T_i$ a reputace $R_i$ uživatelů zprávu vyvracejících $N_d$ a potvrzujících $N_v$.
 
-\section{Nevýhody}
+$$C = T_p R_p + \sum_{i}^{N_v} T_i R_i - \sum_{i}^{N_d} T_i R_i$$
+
+Samotné rozhodnutí, zda je zpráva pravdivá nebo ne je ponecháno na konzumentovi, i když existují pokusy o automatizaci tohoto rozhodnutí (např. \cite{giasemidis16}), kategoricky jsem se rozhodl nechat toto rozhodnutí na uživateli.
+
+\subsection{Nevýhody}
 \label{sec:nevyhody}
 Jedno ze slabých míst je předpoklad, že si uživatel (zdroj informace) může dovolit zveřejnit svou identitu, což často v represivních režimech není slučitelné s přežitím.
+
 Také je nutné dosáhnout určitého množství uživatelů, aby síť začala být užitečná. Jinak nebude dostatek zdrojů informací a dostatek uživatelů, kteří budou svědky jedné události
 
-\chapter{Závěr}
+\section{Závěr}
 \label{ch:zaver}
 
 V práci jsem popsal problém tradičních médií (klesající důvěryhodnost), proč nás tento problém trápí (nefungující demokracie) a navrhl řešení, které se snaží tyto problémy vyřešit.
 
-Návrhem je sociální síť, kde zdrojem zpráv jsou sami její uživatelé, ale na rozdíl od většiny takto navržených sítí (Facebook, Twitter, ...) zprávy jsou garantovány osobní reputací uživatelů.V praxi by si tak nikdo neměl dovolit zveřejnit zprávu za kterou se nemůže zaručit a když už se taková věc stane, zpráva by měla být zavržena ostatními uživateli.
+Návrhem je sociální síť, kde zdrojem zpráv jsou sami její uživatelé, ale na rozdíl od většiny takto navržených sítí (Facebook, Twitter, ...) zprávy jsou garantovány osobní reputací uživatelů. V praxi by si tak nikdo neměl dovolit zveřejnit zprávu, za kterou se nemůže zaručit, a když už se taková věc stane, zpráva by měla být zavržena ostatními uživateli.
 
-Protože by bylo naivní spoléhat na to, že se uživatelé budou chovat zodpovědně, je síť navržena tak, aby vedla uživatele k zodpovědnému chování, pomocí osobní reputace uživatelů.
+Bylo by naivní spoléhat na to, že se uživatelé budou chovat zodpovědně, proto je síť navržena tak, aby vedla uživatele k zodpovědnému chování, pomocí osobní reputace uživatelů.
 
-Používání takového systému si představuji tak, že vznikne mobilní aplikace, ze které budou uživatelé publikovat a přijímat zprávy. Aplikaci budou používat například na zasedání lokálních zastupitelství, v galerii poslanecké sněmovny nebo prostě když budou svědkem události, která jim přijde významná.
+Používání takového systému si představuji tak, že vznikne mobilní aplikace, ze které budou uživatelé publikovat a přijímat zprávy. Aplikaci budou používat například na zasedání lokálních zastupitelstev, v galerii poslanecké sněmovny nebo prostě když budou svědkem události, která jim přijde významná.
 
 Ostatní uživatelé pak dodají zprávě na důvěryhodnosti a významu, nebo zpráva zapadne, toto se bude dít přirozenou cestou, bez potřeby centrální instituce. I úložiště zpráv a certifikátů uživatelů by mělo být distribuované (například pomocí \textit{Interplanetary File System}\footnote{Meziplanetární souborový systém, navržený s důrazem na zachování integrity dat a jejich distribuovanému rozložení}, \cite{benet14}.).
 
 Mojí další činností bude implementovat zde navržený systém a postarat se o jeho rozšíření, pokud se ukáže jako životaschopný.
 
-\printglossaries
 \printbibliography[heading=bibintoc]
 \end{document}
